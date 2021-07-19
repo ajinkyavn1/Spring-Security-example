@@ -1,6 +1,7 @@
 package com.spring.springsecurity.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,8 +16,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     private  final PasswordEncoder passwordEncoder;
-
-
     @Autowired
     public ApplicationSecurityConfig(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
@@ -35,10 +34,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    @Bean
     protected UserDetailsService userDetailsService() {
       UserDetails Aj= User.builder()
-               .username("Ajinkya")
-               .password(passwordEncoder.encode("Ajinkya"))
+               .username("USER")
+               .password(passwordEncoder.encode("USER"))
                .roles("STUDENT")
                .build();
        return  new InMemoryUserDetailsManager(

@@ -15,8 +15,8 @@ public class SpringSecurityApplication {
 		SpringApplication.run(SpringSecurityApplication.class, args);
 
 	}
-	@GetMapping()
-	ResponseEntity<String> index(){
-		return  new ResponseEntity<>("Cons.st," ,HttpStatus.OK);
-	}
+//	@GetMapping()
+//	ResponseEntity<String> index(){
+//		return  new ResponseEntity<>("Cons.st," ,HttpStatus.OK);
+//	}
 }
