@@ -9,6 +9,7 @@ import static com.spring.springsecurity.Security.ApplicationUserPermisions.*;
 
 public enum ApplicationUserRoles {
     STUDENT(Sets.newHashSet()),
+    SUPERADMIN(Sets.newHashSet(COURSE_READ,COURSE_WRITE,STUDENT_READ,STUDENT_WRITE)),
     ADMIN(Sets.newHashSet(COURSE_READ,COURSE_WRITE,STUDENT_READ,STUDENT_WRITE));
     private  final Set<ApplicationUserPermisions> permisions;
 
