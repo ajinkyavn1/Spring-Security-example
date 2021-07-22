@@ -55,7 +55,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .build();
        return  new InMemoryUserDetailsManager(
                Student1,
-               Admin
+               Admin,
+               Administrative
        );
     }
 }
