@@ -24,7 +24,7 @@ public class StudentManagementControllar {
         System.out.println(student);
     }
     @DeleteMapping(path = "{id}")
-    public  void deleteStudent(@PathVariable  Integer id){
+    public  void deleteStudent(@PathVariable()  Integer id){
         System.out.println(id);
     }
     @PutMapping(path = "{id}")
