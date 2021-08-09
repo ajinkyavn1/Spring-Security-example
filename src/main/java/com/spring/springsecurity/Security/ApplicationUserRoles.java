@@ -12,7 +12,7 @@ import static com.spring.springsecurity.Security.ApplicationUserPermisions.*;
 
 public enum ApplicationUserRoles {
     STUDENT(Sets.newHashSet()),
-    SUPERADMIN(Sets.newHashSet(COURSE_READ,COURSE_WRITE,STUDENT_READ,STUDENT_WRITE)),
+    SUPERADMIN(Sets.newHashSet(COURSE_READ,STUDENT_READ)),
     ADMIN(Sets.newHashSet(COURSE_READ,COURSE_WRITE,STUDENT_READ,STUDENT_WRITE));
     private  final Set<ApplicationUserPermisions> permisions;
 
@@ -27,7 +27,7 @@ public enum ApplicationUserRoles {
         Set<SimpleGrantedAuthority> permissions= getPermisions().stream()
                 .map(permisions->new SimpleGrantedAuthority(permisions.getPermission()))
                 .collect(Collectors.toSet());
-        permissions.add(new SimpleGrantedAuthority("ROLE"+this.name()));
+        permissions.add(new SimpleGrantedAuthority("ROLE_"+this.name()));
         return  permissions;
     }
 }
