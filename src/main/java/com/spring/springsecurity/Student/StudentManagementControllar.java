@@ -1,12 +1,15 @@
 package com.spring.springsecurity.Student;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("management/api/v1/students")
+@RequestMapping("/management/api/v1/students/")
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class StudentManagementControllar {
     public  static final List<Student> studentList= Arrays.asList(
             new Student(1,"Ajinkya Narkhede","Ajinkya" ),
@@ -15,20 +18,32 @@ public class StudentManagementControllar {
             new Student(4,"Bhavesh Patil","Ajinkya" ),
             new Student(5,"Yogesh gend", "Ajinkya")
     );
+
     @GetMapping
-    public  List<Student> getAllStudent(){
-        return  studentList;
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
+    public List<Student> getAllStudents() {
+        System.out.println("getAllStudents");
+        return studentList;
     }
+
     @PostMapping
-    public void  RegisterNewUser(@RequestBody  Student student){
+    @PreAuthorize("hasAuthority('student:write')")
+    public void registerNewStudent(@RequestBody Student student) {
+        System.out.println("registerNewStudent");
         System.out.println(student);
     }
-    @DeleteMapping(path = "{id}")
-    public  void deleteStudent(@PathVariable()  Integer id){
-        System.out.println(id);
+
+    @DeleteMapping(path = "{studentId}")
+    @PreAuthorize("hasAuthority('student:write')")
+    public void deleteStudent(@PathVariable("studentId") Integer studentId) {
+        System.out.println("deleteStudent");
+        System.out.println(studentId);
     }
-    @PutMapping(path = "{id}")
-    public  void UpdateStudent(@PathVariable Integer id,@RequestBody  Student student){
-        System.out.println(String.format("%s%s",id,student));
+
+    @PutMapping(path = "{studentId}")
+    @PreAuthorize("hasAuthority('student:write')")
+    public void updateStudent(@PathVariable("studentId") Integer studentId, @RequestBody Student student) {
+        System.out.println("updateStudent");
+        System.out.printf("%s %s%n", studentId, student);
     }
 }
